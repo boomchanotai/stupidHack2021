@@ -1,0 +1,66 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #faff00;
+}
+
+.thawaipraporn {
+  font-size: large;
+}
+
+.container-1 {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.container-2 {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.container-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.sign_input {
+  background-color: #f1f1f1;
+  outline: none;
+  border: none;
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 10px 0px;
+}
+
+.sign_button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  padding: 10px 50px;
+  border-radius: 99999px;
+  background-color: #f19100;
+  color: #faff00;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffc700;
+}
+
+.menu button {
+  outline: none;
+  border: none;
+  background: none;
+  padding: 10px;
+}
+
+.menu button img {
+  width: 70px;
+}
