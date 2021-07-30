@@ -64,3 +64,110 @@ body {
 .menu button img {
   width: 70px;
 }
+
+/* home */
+nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #ffc700;
+}
+
+nav > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px 40px;
+  font-size: 1.5em;
+}
+
+nav > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px 40px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  display: inline;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5em;
+}
+
+.card {
+  background-color: #ffc700;
+  padding: 40px;
+  margin: 20px 0px;
+  display: flex;
+  gap: 50px;
+}
+
+.card:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.card:nth-child(even) {
+  flex-direction: row;
+}
+
+.card img {
+  max-width: 400px;
+}
+
+.card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.readmore {
+  background: none;
+  outline: none;
+  border: none;
+  background-color: #ffc700;
+  padding: 10px 40px;
+  color: #ff0000;
+}
+
+.trawaipraporn-2 {
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffc700;
+  text-align: center;
+}
+
+footer {
+  background-color: #f19100;
+  color: #ffffff;
+}
+
+footer > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+footer h4 {
+  margin: 0;
+}
