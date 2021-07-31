@@ -9,26 +9,52 @@
   </head>
   <body>
     <div class="menu">
-      <button><img src="assets/img_531232.png" alt="" /></button>
-      <button><img src="assets/home-icon-silhouette.svg" alt="" /></button>
+      <a href="home.html"
+        ><button style="cursor: pointer">
+          <img src="assets/img_531232.png" alt="" /></button
+      ></a>
+      <a href="home.html"
+        ><button style="cursor: pointer">
+          <img src="assets/home-icon-silhouette.svg" alt="" /></button
+      ></a>
     </div>
     <div class="container-1">
       <h1 style="text-align: center">ร่วมลงนามถวายพระพร</h1>
       <img src="assets/banner.jpeg" width="100%" alt="" />
       <div>
-        <input type="text" class="sign_input" placeholder="ชื่อ" />
-        <input type="text" class="sign_input" placeholder="นามสกุล" />
-        <select class="sign_input">
-          <option value="" selected disabled>กรุณาเลือกจังหวัด</option>
-          <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
-          <option value="สุโขทัย">สุโขทัย</option>
-          <option value="ธนบุรี">ธนบุรี</option>
-          <option value="อยุธยา">อยุธยา</option>
-        </select>
-        <center>
-          <button class="sign_button">ร่วมลงนามถวายพระพร</button>
-        </center>
+        <form id="thawaipraporn">
+          <input type="text" class="sign_input" placeholder="ชื่อ" required />
+          <input
+            type="text"
+            class="sign_input"
+            placeholder="นามสกุล"
+            required
+          />
+          <select class="sign_input" required>
+            <option value="" selected disabled>กรุณาเลือกจังหวัด</option>
+            <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
+            <option value="สุโขทัย">สุโขทัย</option>
+            <option value="ธนบุรี">ธนบุรี</option>
+            <option value="อยุธยา">อยุธยา</option>
+          </select>
+          <center>
+            <button class="sign_button">ร่วมลงนามถวายพระพร</button>
+          </center>
+        </form>
       </div>
     </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $("#thawaipraporn").submit(function (e) {
+        e.preventDefault();
+
+        window.location.href = "home.html";
+      });
+    </script>
   </body>
 </html>
