@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="./js/scripts.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .border-purp {
+        border: 3px solid #6552dd;
+      }
+      .border-gray-sel {
+        border: 3px solid #979797;
+      }
+      body {
+        height: 100vh;
+      }
+      .box {
+        height: calc(100vh - 100px);
+      }
+      .in {
+        background-color: #00c2ff !important;
+        border: 3px solid #ff0000 !important;
+        width: 80%;
+        font-size: 24px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div>แชทคนรักชาติ</div>
+      <div>
+        <ul>
+          <li>chat</li>
+          <li id="username-show">username</li>
+        </ul>
+      </div>
+    </nav>
+    <div class="flex box">
+      <div class="w-1/5" id="people"></div>
+      <div class="w-full bg-white flex flex-col">
+        <div class="p-2 bg-red-600">
+          <div class="text-2xl" id="cur-name">{มหิงสา รักภัคดี}</div>
+        </div>
+        <center id="text-1">
+          ขณะนี้ คุณสามารถแชทกับคนรักชาติ “{ยอมสู้ตายเพื่อในหลวง}” ได้
+          คุณไม่จำเป็นต้องกลัวการเปิดเผยตัวตนในที่แห่งนี้
+          เพราะเราทุกคนคือคนรักชาติ
+          เราทุกคนรักในหลวงพลังใจของเราจะทำให้ประเทศชาติเดินหน้าต่อไปได้
+        </center>
+        <div class="h-full overflow-scroll" id="textchat">
+          <div class="flex pl-2 mt-2">
+            <img src="./assets/niratos.jpeg" class="h-8 w-8" alt="" />
+            <div class="rounded-full p-1 pr-4 ml-2 pl-4 bg-red-500">dddddd</div>
+            <div class="flex flex-col justify-end ml-2">
+              <div class="text-xs">๑๓.๔๓ น.</div>
+            </div>
+          </div>
+          <div class="flex pl-2 mt-2">
+            <img src="./assets/niratos.jpeg" class="h-8 w-8" alt="" />
+            <div class="rounded-full p-1 pr-4 ml-2 pl-4 bg-red-500">dddddd</div>
+            <div class="flex flex-col justify-end ml-2">
+              <div class="text-xs">๑๓.๔๓ น.</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 flex justify-center">
+          <input class="in" type="text" id="in" />
+          <img
+            onclick="sendMessage()"
+            src="./assets/send.png"
+            alt=""
+            class="h-12 w-12 ml-2"
+          />
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      if (!localStorage.getItem("username")) {
+        window.location.href = "register.html";
+      }
+
+      $("#thawaipraporn").submit(function (e) {
+        e.preventDefault();
+
+        window.location.href = "home.html";
+      });
+
+      $("#username-show").html(localStorage.getItem("username"));
+
+      let friends = [
+        { name: "มหิงสา รักภัคดี", lastChat: "ส่งรูปให้คุณ" },
+        { name: "พลเอกประยุทธิ์ จันทร์...", lastChat: "ส่งรูปให้คุณ" },
+        { name: "รักแต่ชาติ บ้านยากจน", lastChat: "ส่งรูปให้คุณ" },
+        { name: "รองเท้าผ้าใบกับใจถึงๆ", lastChat: "ส่งรูปให้คุณ" },
+        { name: "ยอมสู้ตายเพื่อในหล...", lastChat: "ส่งรูปให้คุณ" },
+        { name: "พลเอกประยุทธิ์ จันทร์...", lastChat: "ส่งรูปให้คุณ" },
+      ];
+
+      let currentUser = "";
+
+      const getDayImg = () => {
+        let days = [
+          "sun.jpg",
+          "mon.jpg",
+          "tue.jpeg",
+          "wed.jpeg",
+          "thu.jpg",
+          "fri.jpg",
+          "sat.jpg",
+        ];
+        return days[new Date().getDay()];
+      };
+      const getDayThai = () => {
+        let days = [
+          "อาทิตย์",
+          "จันทร์",
+          "อังคาร",
+          "พุทธ",
+          "พฤหัส",
+          "ศุกร์",
+          "เสาร์",
+        ];
+        return days[new Date().getDay()];
+      };
+
+      const getTime = () => {
+        let d = new Date();
+        return d.getHours() + "." + d.getMinutes();
+      };
+
+      const numberThainification = (n) => {
+        const thaiNum = ["๐", "๑", "๒", "๓", "๔", "๕", "๖", "๗", "๘", "๙"];
+        return n.replace(/[0-9]/g, (s) => {
+          return thaiNum[s];
+        });
+      };
+
+      let chat = {};
+      friends.map(({ name }) => {
+        chat[name] = [
+          {
+            text: "สวัสดีวัน" + getDayThai(),
+            isSendByMe: false,
+            img: false,
+            timestamp: numberThainification(getTime()),
+          },
+          {
+            text: getDayImg(),
+            isSendByMe: false,
+            img: true,
+            timestamp: numberThainification(getTime()),
+          },
+          {
+            text: "สวัสดี ผม" + name,
+            isSendByMe: false,
+            img: false,
+            timestamp: numberThainification(getTime()),
+          },
+        ];
+      });
+      const updateChat = () => {
+        $("#textchat").html(
+          chat[currentUser]
+            .map(({ text, isSendByMe, timestamp, img }) =>
+              !isSendByMe
+                ? `
+          <div class="flex pl-2 mt-2">
+            <img src="./assets/niratos.jpeg" class="h-8 w-8" alt="" />
+            ${
+              img
+                ? `<img src="./assets/${text}" class="h-48" alt="" />`
+                : `<div class="rounded-full p-1 pr-4 ml-2 pl-4 bg-red-500">${text}</div>`
+            }
+            <div class="flex flex-col justify-end ml-2">
+              <div class="text-xs">${timestamp} น.</div>
+            </div>
+          </div>
+        `
+                : `
+          <div class="flex pr-2 mt-2 justify-end">
+            <div class="flex flex-col justify-end ml-2">
+              <div class="text-xs">${timestamp} น.</div>
+            </div>
+            <div class="rounded-full p-1 pr-4 ml-2 pl-4 bg-red-500">${text}</div>
+
+          </div>
+        `
+            )
+            .join()
+        );
+        $("#textchat").scrollTop($("#textchat").height());
+      };
+
+      const setCurrentUser = (u) => {
+        $("#text-1").html(`
+            ขณะนี้ คุณสามารถแชทกับคนรักชาติ “${u}” ได้
+            คุณไม่จำเป็นต้องกลัวการเปิดเผยตัวตนในที่แห่งนี้
+            เพราะเราทุกคนคือคนรักชาติ
+            เราทุกคนรักในหลวงพลังใจของเราจะทำให้ประเทศชาติเดินหน้าต่อไปได้
+        `);
+        $("#cur-name").html(u);
+        $("#people").html(
+          friends
+            .map(
+              ({ name, lastChat }) => `
+          <div
+          class="p-2 ${
+            name != u ? "border-purp" : "border-gray-sel"
+          } flex cursor-pointer"
+          onclick="setCurrentUser('${name}')"
+          id=""
+        >
+          <img
+            src="./assets/niratos.jpeg"
+            alt=""
+            class="h-10 w-10 rounded-full"
+          />
+          <div class="ml-2">
+            <div class="text-xl font-bold">${name}</div>
+            <div class="">${lastChat}</div>
+          </div>
+        </div>
+        `
+            )
+            .join("")
+        );
+        currentUser = u;
+        updateChat();
+      };
+
+      setCurrentUser(friends[0].name);
+      updateChat();
+
+      const callBot = (message, user) => {
+        const wataslim = fetch("/api/wataslim");
+        wataslim
+          .then((response) => response.text())
+          .then((text) => {
+            setTimeout(() => {
+              chat[user].push({
+                text: text,
+                isSendByMe: false,
+                img: false,
+                timestamp: numberThainification(getTime()),
+              });
+              updateChat();
+            }, 2000);
+          });
+      };
+
+      const sendMessage = () => {
+        const message = $("#in").val();
+        chat[currentUser].push({
+          text: message,
+          isSendByMe: true,
+          img: false,
+          timestamp: numberThainification(getTime()),
+        });
+        callBot(message, currentUser);
+        updateChat();
+        $("#in").val("");
+      };
+    </script>
+  </body>
+</html>
